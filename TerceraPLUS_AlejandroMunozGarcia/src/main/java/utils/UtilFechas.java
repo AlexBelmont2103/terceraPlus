@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  *
@@ -34,9 +35,9 @@ public class UtilFechas {
         return fecha.toLocalDate();
     }
 
-    public static LocalDate convertirString_LocalDate(String yyyyMMdd) {
+    public static LocalDate convertirString_LocalDate(String yyyyMMdd) throws DateTimeParseException {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate fechaLocalDate = LocalDate.parse(yyyyMMdd, formatter);
         return fechaLocalDate;
     }

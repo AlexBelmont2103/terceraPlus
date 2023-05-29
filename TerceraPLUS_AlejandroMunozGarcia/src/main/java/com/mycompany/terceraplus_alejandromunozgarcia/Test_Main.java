@@ -1,5 +1,7 @@
 package com.mycompany.terceraplus_alejandromunozgarcia;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author AMG
@@ -7,6 +9,8 @@ package com.mycompany.terceraplus_alejandromunozgarcia;
 public class Test_Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        String fecha="21/03/1990";
+        
+        LocalDate date = utils.UtilFechas.convertirString_LocalDate(fecha);
     }
 }

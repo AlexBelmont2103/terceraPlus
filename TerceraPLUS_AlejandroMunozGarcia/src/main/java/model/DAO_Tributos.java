@@ -31,7 +31,7 @@ public class DAO_Tributos {
     }
 
     public void insertCR(VehiculoCuatroRuedas vc) throws SQLException {
-        String sql = "insert into cuatroRuedad(nif, pago, caballos, matricula) values(?, ?, ?, ?)";
+        String sql = "insert into cuatroRuedas(nif, pago, caballos, matricula) values(?, ?, ?, ?)";
         PreparedStatement sentencia = null;
         sentencia = con.prepareStatement(sql);
         sentencia.setString(1, vc.getNIF());
@@ -43,7 +43,7 @@ public class DAO_Tributos {
     }
 
     public void insertDR(VehiculoDosRuedas vd) throws SQLException {
-        String sql = "insert into bienesInmuebles(nif, pago, metros, referencia) values(?, ?, ?, ?)";
+        String sql = "insert into dosRuedas(nif, pago, cilindrada, matricula) values(?, ?, ?, ?)";
         PreparedStatement sentencia = null;
         sentencia = con.prepareStatement(sql);
         sentencia.setString(1, vd.getNIF());
@@ -74,6 +74,8 @@ public class DAO_Tributos {
             elegido = new BienesInmuebles(metros, referencia, id, nif, pago, pagado, importe);
 
         }
+        sentencia.close();
+        resultado.close();
         return elegido;
     }
 
@@ -97,6 +99,8 @@ public class DAO_Tributos {
             elegido = new VehiculoCuatroRuedas(matricula, caballos, id, nif, pago, pagado, importe);
 
         }
+        sentencia.close();
+        resultado.close();
         return elegido;
     }
 
@@ -120,6 +124,8 @@ public class DAO_Tributos {
             elegido = new VehiculoDosRuedas(matricula, cilindrada, id, nif, pago, pagado, importe);
 
         }
+        sentencia.close();
+        resultado.close();
         return elegido;
     }
 

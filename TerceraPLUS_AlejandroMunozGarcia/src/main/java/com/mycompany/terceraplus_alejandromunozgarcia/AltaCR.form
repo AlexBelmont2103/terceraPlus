@@ -52,18 +52,18 @@
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="fldNif" pref="200" max="32767" attributes="0"/>
-                                  <Component id="fldReferencia" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="fldID" alignment="0" pref="200" max="32767" attributes="0"/>
                                   <Component id="fldPago" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="fldMetros" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="fldCaballos" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="fldRefCatastral" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="fldMatricula" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="fldImporte" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -80,7 +80,7 @@
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fldReferencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fldID" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -100,12 +100,12 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fldMetros" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fldCaballos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fldRefCatastral" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fldMatricula" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -129,7 +129,7 @@
         <Property name="text" type="java.lang.String" value="Referencia"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="fldReferencia">
+    <Component class="javax.swing.JTextField" name="fldID">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -167,9 +167,9 @@
         <Property name="text" type="java.lang.String" value="Importe"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="fldRefCatastral">
+    <Component class="javax.swing.JTextField" name="fldMatricula">
     </Component>
-    <Component class="javax.swing.JTextField" name="fldMetros">
+    <Component class="javax.swing.JTextField" name="fldCaballos">
     </Component>
     <Component class="javax.swing.JTextField" name="fldImporte">
     </Component>
@@ -177,16 +177,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="ALTA"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAltaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPagar">
       <Properties>
         <Property name="text" type="java.lang.String" value="PAGAR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPagarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSalir">
       <Properties>
         <Property name="text" type="java.lang.String" value="SALIR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

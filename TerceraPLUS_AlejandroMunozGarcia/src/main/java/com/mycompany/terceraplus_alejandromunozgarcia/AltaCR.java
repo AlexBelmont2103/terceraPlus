@@ -1,5 +1,11 @@
 package com.mycompany.terceraplus_alejandromunozgarcia;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import model.*;
 
 /**
@@ -19,6 +25,108 @@ public class AltaCR extends javax.swing.JDialog {
         dao = Principal.getDao();
     }
 
+    public JButton getBtnAlta() {
+        return btnAlta;
+    }
+
+    public void setBtnAlta(JButton btnAlta) {
+        this.btnAlta = btnAlta;
+    }
+
+    public JButton getBtnPagar() {
+        return btnPagar;
+    }
+
+    public void setBtnPagar(JButton btnPagar) {
+        this.btnPagar = btnPagar;
+    }
+
+    public JTextField getFldImporte() {
+        return fldImporte;
+    }
+
+    public void setFldImporte(JTextField fldImporte) {
+        this.fldImporte = fldImporte;
+    }
+
+    public JTextField getFldCaballos() {
+        return fldCaballos;
+    }
+
+    public void setFldCaballos(JTextField fldCaballos) {
+        this.fldCaballos = fldCaballos;
+    }
+
+    public JTextField getFldNif() {
+        return fldNif;
+    }
+
+    public void setFldNif(JTextField fldNif) {
+        this.fldNif = fldNif;
+    }
+
+    public JTextField getFldPagado() {
+        return fldPagado;
+    }
+
+    public void setFldPagado(JTextField fldPagado) {
+        this.fldPagado = fldPagado;
+    }
+
+    public JTextField getFldPago() {
+        return fldPago;
+    }
+
+    public void setFldPago(JTextField fldPago) {
+        this.fldPago = fldPago;
+    }
+
+    public JTextField getFldID() {
+        return fldID;
+    }
+
+    public void setFldID(JTextField fldID) {
+        this.fldID = fldID;
+    }
+
+    public JTextField getFldMatricula() {
+        return fldMatricula;
+    }
+
+    public void setFldMatricula(JTextField fldMatricula) {
+        this.fldMatricula = fldMatricula;
+    }
+
+    public void disableAll() {
+        this.fldID.setEditable(false);
+        this.fldImporte.setEditable(false);
+        this.fldCaballos.setEditable(false);
+        this.fldNif.setEditable(false);
+        this.fldPagado.setEditable(false);
+        this.fldPago.setEditable(false);
+        this.fldMatricula.setEditable(false);
+
+        this.btnAlta.setEnabled(false);
+    }
+
+    public void disableSome() {
+        this.fldID.setEditable(false);
+        this.fldImporte.setEditable(false);
+        this.fldPagado.setEditable(false);
+
+        this.btnPagar.setEnabled(false);
+    }
+
+    private boolean comprobarCampos() {
+        boolean bandera = false;
+        if (fldNif.getText() == null || fldPago.getText() == null
+                || fldCaballos.getText() == null || fldMatricula.getText() == null) {
+            bandera = true;
+        }
+
+        return bandera;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,7 +137,7 @@ public class AltaCR extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        fldReferencia = new javax.swing.JTextField();
+        fldID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         fldNif = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -39,8 +147,8 @@ public class AltaCR extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        fldRefCatastral = new javax.swing.JTextField();
-        fldMetros = new javax.swing.JTextField();
+        fldMatricula = new javax.swing.JTextField();
+        fldCaballos = new javax.swing.JTextField();
         fldImporte = new javax.swing.JTextField();
         btnAlta = new javax.swing.JButton();
         btnPagar = new javax.swing.JButton();
@@ -63,10 +171,25 @@ public class AltaCR extends javax.swing.JDialog {
         jLabel7.setText("Importe");
 
         btnAlta.setText("ALTA");
+        btnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaActionPerformed(evt);
+            }
+        });
 
         btnPagar.setText("PAGAR");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,15 +221,15 @@ public class AltaCR extends javax.swing.JDialog {
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(fldNif, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(fldReferencia, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(fldID, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(fldPago)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
-                                .addComponent(fldMetros, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(fldCaballos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fldRefCatastral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fldMatricula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(fldImporte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
@@ -116,7 +239,7 @@ public class AltaCR extends javax.swing.JDialog {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(fldReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -132,11 +255,11 @@ public class AltaCR extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(fldMetros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fldCaballos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(fldRefCatastral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fldMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -152,18 +275,45 @@ public class AltaCR extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
+        if (!comprobarCampos()) {
+            try {
+                String nif = fldNif.getText();
+                LocalDate pago = utils.UtilFechas.convertirString_LocalDate(fldPago.getText());
+                Integer caballos = Integer.valueOf(fldCaballos.getText());
+                String matricula = fldMatricula.getText();
+
+                VehiculoCuatroRuedas cr = new VehiculoCuatroRuedas(nif, pago, matricula, caballos);
+                dao.insertCR(cr);
+                JOptionPane.showMessageDialog(this, "Operación completada con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            } catch (SQLException | DateTimeParseException | NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Rellena todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAltaActionPerformed
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPagarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JTextField fldCaballos;
+    private javax.swing.JTextField fldID;
     private javax.swing.JTextField fldImporte;
-    private javax.swing.JTextField fldMetros;
+    private javax.swing.JTextField fldMatricula;
     private javax.swing.JTextField fldNif;
     private javax.swing.JTextField fldPagado;
     private javax.swing.JTextField fldPago;
-    private javax.swing.JTextField fldRefCatastral;
-    private javax.swing.JTextField fldReferencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

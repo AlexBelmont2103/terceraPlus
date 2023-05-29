@@ -56,7 +56,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         fldRef = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnPagar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,7 +82,12 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel3.setText("Ref Catastral o matrícula");
 
-        jButton1.setText("PAGAR TRIBUTO");
+        btnPagar.setText("PAGAR TRIBUTO");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,7 +117,7 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(cbTributos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(fldRef))))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(btnPagar)))
                 .addGap(85, 85, 85))
         );
         layout.setVerticalGroup(
@@ -128,7 +133,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(fldRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnPagar))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(56, 56, 56)
@@ -149,15 +154,35 @@ public class Principal extends javax.swing.JFrame {
         String elemento = cbTributos.getSelectedItem().toString();
         if (elemento.equalsIgnoreCase("Bienes inmuebles")) {
             AltaBI altaBi = new AltaBI(this, true);
+            altaBi.disableSome();
             altaBi.setVisible(true);
         } else if (elemento.equalsIgnoreCase("Vehículos de cuatro ruedas")) {
             AltaCR altaCr = new AltaCR(this, true);
+            altaCr.disableSome();
             altaCr.setVisible(true);
         } else if (elemento.equalsIgnoreCase("Vehículos de dos ruedas")) {
             AltaDR altaDr = new AltaDR(this, true);
+            altaDr.disableSome();
             altaDr.setVisible(true);
         }
     }//GEN-LAST:event_btnAltaActionPerformed
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        String elemento = cbTributos.getSelectedItem().toString();
+        if (elemento.equalsIgnoreCase("Bienes inmuebles")) {
+            AltaBI altaBi = new AltaBI(this, true);
+            altaBi.disableAll();
+            altaBi.setVisible(true);
+        } else if (elemento.equalsIgnoreCase("Vehículos de cuatro ruedas")) {
+            AltaCR altaCr = new AltaCR(this, true);
+            altaCr.disableAll();
+            altaCr.setVisible(true);
+        } else if (elemento.equalsIgnoreCase("Vehículos de dos ruedas")) {
+            AltaDR altaDr = new AltaDR(this, true);
+            altaDr.disableAll();
+            altaDr.setVisible(true);
+        }
+    }//GEN-LAST:event_btnPagarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,10 +221,10 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
+    private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbTributos;
     private javax.swing.JTextField fldRef;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
