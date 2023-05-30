@@ -98,6 +98,16 @@ public class AltaBI extends javax.swing.JDialog {
     public void setFldID(JTextField fldID) {
         this.fldID = fldID;
     }
+    
+    public void setFields(BienesInmuebles bi){
+        fldID.setText(bi.getId().toString());
+        fldNif.setText(bi.getNIF());
+        fldPago.setText(bi.getFecha_limite().toString());
+        fldPagado.setText(LocalDate.now().toString());
+        fldMetros.setText(bi.getMetros().toString());
+        fldRefCatastral.setText(bi.getRefCatastro());
+        fldImporte.setText(bi.calcularImporte().toString());
+    }
 
     public void disableAll() {
         this.fldID.setEditable(false);
@@ -294,7 +304,15 @@ public class AltaBI extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        // TODO add your handling code here:
+        try {
+            Double importe = Double.valueOf(fldImporte.getText());
+            String referencia = fldRefCatastral.getText();
+            dao.updatePagadoBI(referencia);
+            dao.updateImporteBI(referencia, importe);
+            JOptionPane.showMessageDialog(this, "Pago completado. Gracias", "Operación completada con éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

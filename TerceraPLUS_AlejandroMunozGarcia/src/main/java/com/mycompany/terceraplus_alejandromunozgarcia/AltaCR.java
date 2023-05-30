@@ -97,6 +97,16 @@ public class AltaCR extends javax.swing.JDialog {
         this.fldMatricula = fldMatricula;
     }
 
+    public void setFields(VehiculoCuatroRuedas cr) {
+        fldID.setText(cr.getId().toString());
+        fldNif.setText(cr.getNIF());
+        fldPago.setText(cr.getFecha_limite().toString());
+        fldPagado.setText(LocalDate.now().toString());
+        fldCaballos.setText(cr.getCaballos().toString());
+        fldMatricula.setText(cr.getMatricula());
+        fldImporte.setText(cr.calcularImporte().toString());
+    }
+
     public void disableAll() {
         this.fldID.setEditable(false);
         this.fldImporte.setEditable(false);
@@ -295,7 +305,15 @@ public class AltaCR extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        // TODO add your handling code here:
+        try {
+            Double importe = Double.valueOf(fldImporte.getText());
+            String matricula = fldMatricula.getText();
+            dao.updatePagadoCR(matricula);
+            dao.updateImporteCR(matricula, importe);
+            JOptionPane.showMessageDialog(this, "Pago completado. Gracias", "Operación completada con éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

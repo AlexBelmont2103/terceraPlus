@@ -6,10 +6,9 @@ package com.mycompany.terceraplus_alejandromunozgarcia;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
-import model.DAO_Tributos;
+import model.*;
 
 /**
  *
@@ -168,19 +167,65 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        String elemento = cbTributos.getSelectedItem().toString();
-        if (elemento.equalsIgnoreCase("Bienes inmuebles")) {
-            AltaBI altaBi = new AltaBI(this, true);
-            altaBi.disableAll();
-            altaBi.setVisible(true);
-        } else if (elemento.equalsIgnoreCase("Vehículos de cuatro ruedas")) {
-            AltaCR altaCr = new AltaCR(this, true);
-            altaCr.disableAll();
-            altaCr.setVisible(true);
-        } else if (elemento.equalsIgnoreCase("Vehículos de dos ruedas")) {
-            AltaDR altaDr = new AltaDR(this, true);
-            altaDr.disableAll();
-            altaDr.setVisible(true);
+        try {
+            String refmat = fldRef.getText();
+            if (dao.comprobarBI(refmat)) {
+                BienesInmuebles bi = dao.selectBI(refmat);
+                if (bi.getImporte() == 0.0) {
+                    if (bi.getFecha_limite().isBefore(LocalDate.now())) {
+                        JOptionPane.showMessageDialog(this, "Se aplicará una multa del 21%", "Pago retrasado", JOptionPane.ERROR_MESSAGE);
+                        AltaBI altaBi = new AltaBI(this, true);
+                        altaBi.setFields(bi);
+                        altaBi.disableAll();
+                        altaBi.setVisible(true);
+                    } else {
+                        AltaBI altaBi = new AltaBI(this, true);
+                        altaBi.setFields(bi);
+                        altaBi.disableAll();
+                        altaBi.setVisible(true);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Este tributo ya está pagado", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (dao.comprobarCR(refmat)) {
+                VehiculoCuatroRuedas cr = dao.selectCR(refmat);
+                if (cr.getImporte() == 0.0) {
+                    if (cr.getFecha_limite().isBefore(LocalDate.now())) {
+                        JOptionPane.showMessageDialog(this, "Se aplicará una multa del 21%", "Pago retrasado", JOptionPane.ERROR_MESSAGE);
+                        AltaCR altaCr = new AltaCR(this, true);
+                        altaCr.setFields(cr);
+                        altaCr.disableAll();
+                        altaCr.setVisible(true);
+                    } else {
+                        AltaCR altaCr = new AltaCR(this, true);
+                        altaCr.setFields(cr);
+                        altaCr.disableAll();
+                        altaCr.setVisible(true);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Este tributo ya está pagado", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (dao.comprobarDR(refmat)) {
+                VehiculoDosRuedas dr = dao.selectDR(refmat);
+                if (dr.getImporte() == 0.0) {
+                    if (dr.getFecha_limite().isBefore(LocalDate.now())) {
+                        JOptionPane.showMessageDialog(this, "Se aplicará una multa del 21%", "Pago retrasado", JOptionPane.ERROR_MESSAGE);
+                        AltaDR altaDr = new AltaDR(this, true);
+                        altaDr.setFields(dr);
+                        altaDr.disableAll();
+                        altaDr.setVisible(true);
+                    } else {
+                        AltaDR altaDr = new AltaDR(this, true);
+                        altaDr.setFields(dr);
+                        altaDr.disableAll();
+                        altaDr.setVisible(true);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Este tributo ya está pagado", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPagarActionPerformed
 

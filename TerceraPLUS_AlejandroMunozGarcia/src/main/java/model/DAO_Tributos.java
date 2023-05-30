@@ -54,6 +54,55 @@ public class DAO_Tributos {
         sentencia.close();
     }
 
+    public boolean comprobarBI(String ref) throws SQLException {
+        boolean bandera = false;
+        String sql = "select * from bienesInmuebles where referencia = ?";
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        sentencia = con.prepareStatement(sql);
+        sentencia.setString(1, ref);
+        resultado = sentencia.executeQuery();
+        if (resultado.next()) {
+            bandera = true;
+        }
+        sentencia.close();
+        resultado.close();
+        return bandera;
+    }
+
+    public boolean comprobarCR(String ref) throws SQLException {
+        boolean bandera = false;
+        String sql = "select * from cuatroRuedas where matricula = ?";
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        sentencia = con.prepareStatement(sql);
+        sentencia.setString(1, ref);
+        resultado = sentencia.executeQuery();
+        if (resultado.next()) {
+            bandera = true;
+        }
+        sentencia.close();
+        resultado.close();
+        return bandera;
+    }
+
+    public boolean comprobarDR(String ref) throws SQLException {
+        boolean bandera = false;
+        String sql = "select * from dosRuedas where matricula = ?";
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        sentencia = con.prepareStatement(sql);
+        sentencia.setString(1, ref);
+        resultado = sentencia.executeQuery();
+        if (resultado.next()) {
+            bandera = true;
+
+        }
+        sentencia.close();
+        resultado.close();
+        return bandera;
+    }
+
     public BienesInmuebles selectBI(String ref) throws SQLException {
         BienesInmuebles elegido = null;
         String sql = "select * from bienesInmuebles where referencia = ?";
@@ -66,7 +115,7 @@ public class DAO_Tributos {
             Integer id = resultado.getInt(1);
             String nif = resultado.getString(2);
             LocalDate pago = utils.UtilFechas.convertirsqlDate_LocalDate(resultado.getDate(3));
-            LocalDate pagado = utils.UtilFechas.convertirsqlDate_LocalDate(resultado.getDate(4));
+            LocalDate pagado = LocalDate.now();
             Integer metros = resultado.getInt(5);
             String referencia = resultado.getString(6);
             Double importe = resultado.getDouble(7);
@@ -81,7 +130,7 @@ public class DAO_Tributos {
 
     public VehiculoCuatroRuedas selectCR(String ref) throws SQLException {
         VehiculoCuatroRuedas elegido = null;
-        String sql = "select * from bienesInmuebles where referencia = ?";
+        String sql = "select * from cuatroRuedas where matricula = ?";
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
         sentencia = con.prepareStatement(sql);
@@ -91,7 +140,7 @@ public class DAO_Tributos {
             Integer id = resultado.getInt(1);
             String nif = resultado.getString(2);
             LocalDate pago = utils.UtilFechas.convertirsqlDate_LocalDate(resultado.getDate(3));
-            LocalDate pagado = utils.UtilFechas.convertirsqlDate_LocalDate(resultado.getDate(4));
+            LocalDate pagado = LocalDate.now();
             Integer caballos = resultado.getInt(5);
             String matricula = resultado.getString(6);
             Double importe = resultado.getDouble(7);
@@ -106,7 +155,7 @@ public class DAO_Tributos {
 
     public VehiculoDosRuedas selectDR(String ref) throws SQLException {
         VehiculoDosRuedas elegido = null;
-        String sql = "select * from bienesInmuebles where referencia = ?";
+        String sql = "select * from dosRuedas where matricula = ?";
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
         sentencia = con.prepareStatement(sql);
@@ -116,7 +165,7 @@ public class DAO_Tributos {
             Integer id = resultado.getInt(1);
             String nif = resultado.getString(2);
             LocalDate pago = utils.UtilFechas.convertirsqlDate_LocalDate(resultado.getDate(3));
-            LocalDate pagado = utils.UtilFechas.convertirsqlDate_LocalDate(resultado.getDate(4));
+            LocalDate pagado = LocalDate.now();
             Integer cilindrada = resultado.getInt(5);
             String matricula = resultado.getString(6);
             Double importe = resultado.getDouble(7);
@@ -141,7 +190,7 @@ public class DAO_Tributos {
     }
 
     public void updatePagadoCR(String matricula) throws SQLException {
-        String sql = "update CuatroRuedas set pagado = ? where matricula = ?";
+        String sql = "update cuatroRuedas set pagado = ? where matricula = ?";
         LocalDate hoy = LocalDate.now();
         PreparedStatement sentencia = null;
         sentencia = con.prepareStatement(sql);
@@ -174,7 +223,7 @@ public class DAO_Tributos {
     }
 
     public void updateImporteCR(String matricula, Double importe) throws SQLException {
-        String sql = "update cuatroRuedas set importe = ? where referencia = ?";
+        String sql = "update cuatroRuedas set importe = ? where matricula = ?";
         LocalDate hoy = LocalDate.now();
         PreparedStatement sentencia = null;
         sentencia = con.prepareStatement(sql);
@@ -185,7 +234,7 @@ public class DAO_Tributos {
     }
 
     public void updateImporteDR(String matricula, Double importe) throws SQLException {
-        String sql = "update dosRuedas set importe = ? where referencia = ?";
+        String sql = "update dosRuedas set importe = ? where matricula = ?";
         LocalDate hoy = LocalDate.now();
         PreparedStatement sentencia = null;
         sentencia = con.prepareStatement(sql);
