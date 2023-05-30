@@ -296,8 +296,10 @@ public class AltaCR extends javax.swing.JDialog {
                 VehiculoCuatroRuedas cr = new VehiculoCuatroRuedas(nif, pago, matricula, caballos);
                 dao.insertCR(cr);
                 JOptionPane.showMessageDialog(this, "Operación completada con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-            } catch (SQLException | DateTimeParseException | NumberFormatException ex) {
+            } catch (SQLException | NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            } catch (DateTimeParseException ex) {
+                JOptionPane.showMessageDialog(this, "Usa el siguiente formato: dd/mm/aaaa", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Rellena todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
