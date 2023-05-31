@@ -1,5 +1,6 @@
 package model;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 /**
@@ -53,12 +54,15 @@ public class VehiculoDosRuedas extends Tributo implements Pagable {
 
     @Override
     public Double calcularImporte() {
+        DecimalFormat df = new DecimalFormat("###.##");
+        Double importe;
         if (super.getFecha_limite().isBefore(super.getFecha_pagado())) {
-            return this.cilindrada * CUOTA * 1.21;
+            importe = cilindrada * CUOTA * 1.21;
         } else {
-            return this.cilindrada * CUOTA;
+            importe = cilindrada * CUOTA;
         }
-
+        importe = Double.valueOf(df.format(importe));
+        return importe;
     }
 
 }
