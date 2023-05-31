@@ -296,7 +296,7 @@ public class AltaDR extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Operación completada con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Ya existe un tributo con esta matrícula", "ERROR", JOptionPane.ERROR_MESSAGE);
             } catch (DateTimeParseException ex) {
                 JOptionPane.showMessageDialog(this, "Usa el siguiente formato: dd/mm/aaaa", "ERROR", JOptionPane.ERROR_MESSAGE);
             } catch(NumberFormatException ex){
